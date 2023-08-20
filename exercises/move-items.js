@@ -12,7 +12,7 @@
  */
 
 // Your code goes here...
-
+const allItems = document.querySelectorAll('.item');
 
 
 /**
@@ -23,7 +23,7 @@
  * */
 
 // Your code goes here
-
+const main = document.getElementById('main');
 
 
 /**
@@ -34,8 +34,11 @@
  */
 
 // Your code goes here
+const favs = document.getElementById('favs');
 
-
+console.log(allItems);
+console.log(main);
+console.log(favs);
 
 /**
  * @task
@@ -47,7 +50,19 @@
  */
 
 // Your code goes here
-
+function updateCollections(id, direction) {
+  const newChild = document.getElementById(id);
+  const icon = newChild.querySelector('.fa-solid');
+  if (direction == 'toMain') {
+    favs.removeChild(newChild);
+    main.append(newChild);
+    icon.classList.replace('fa-heart-crack', 'fa-heart-circle-plus');
+  } else {
+    main.removeChild(newChild);
+    favs.append(newChild);
+    icon.classList.replace('fa-heart-circle-plus', 'fa-heart-crack');
+  }
+};
 
 
 /**
@@ -65,5 +80,9 @@
  */
 
 // Your code goes here...
-
+allItems.forEach(elem => {
+  elem.addEventListener('click', function() {
+    (this.parentElement.id == 'main') ? updateCollections(this.id, 'toFavs') : updateCollections(this.id, 'toMain');
+  }) 
+});
 

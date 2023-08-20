@@ -80,7 +80,7 @@ In the previous example you've learned how to manipulate a storage property valu
 ```JS
 // Create an object that keeps the data we want to store in localStorage
 const data = {
-  items: [1, 2, 3];
+  items: [1, 2, 3]
 }
 
 // Store data in the 'favorites' property of localStorage

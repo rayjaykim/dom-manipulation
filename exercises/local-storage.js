@@ -38,3 +38,47 @@
  */
 
 // Your code goes here...
+
+const container = document.querySelector('.cardsContainer');
+const allItems = document.querySelectorAll('.card');
+
+const data = {
+  items: []
+};
+// localStorage.setItem("favorites", "");
+const fav = localStorage.getItem("favorites");
+if (!fav) {
+  localStorage.setItem("favorites", JSON.stringify(data));
+}
+
+const favID = (elem) => {
+  const item = elem.target;
+  const fav = localStorage.getItem("favorites");
+  if (fav.includes(item.id) && item.id > 0) {
+    let storageArr = localStorage.getItem("favorites");
+    const updatedData = JSON.parse(storageArr);
+    const index = updatedData.items.indexOf(item.id);
+    updatedData.items.splice(index, 1);
+    localStorage.setItem("favorites", JSON.stringify(updatedData));
+  } else if (item.id > 0) {
+    let storageArr = localStorage.getItem("favorites");
+    const updatedData = JSON.parse(storageArr);
+    updatedData.items.push(item.id);
+    localStorage.setItem("favorites", JSON.stringify(updatedData));
+  }
+}
+function redFn() {
+  const fav = localStorage.getItem("favorites");
+  const newArr = Array.from(allItems);
+  newArr.forEach(elem => {
+    if (fav.includes(elem.id) && elem.id > 0) {
+      elem.style.backgroundColor = 'red';
+    } else {
+      elem.style.backgroundColor = 'white';
+    }
+  });
+}
+
+redFn();
+container.addEventListener('click', favID);
+container.addEventListener('click', redFn);
